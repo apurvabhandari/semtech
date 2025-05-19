@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: IAM User and Group for Contractors
+
+Resources:
+  ContractorsGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: Contractors
+
+  ContractorsPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: ContractorsAccessPolicy
+      Groups:
+        - !Ref ContractorsGroup
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - ec2:*
+              - s3:*
+              - eks:*
+            Resource: "*"
+
+  ContractorsUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: contractor-user
+      Groups:
+        - !Ref ContractorsGroup
