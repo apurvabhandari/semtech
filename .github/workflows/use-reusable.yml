@@ -1,0 +1,9 @@
+name: Call Reusable Build
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  call-build:
+    uses: ./.github/workflows/reusable-java-build.yml
